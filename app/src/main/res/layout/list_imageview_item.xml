@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.naturenine.ui.activity.fragment.task1.adapter.ImageItemViewModel"/>
+            type="com.androidsample.ui.activity.fragment.task1.adapter.ImageItemViewModel" />
 
     </data>
 

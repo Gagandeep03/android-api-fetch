@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.naturenine.ui.activity.MainActivityViewModel" />
+            type="com.androidsample.ui.activity.MainActivityViewModel" />
 
     </data>
 <android.support.design.widget.CoordinatorLayout
