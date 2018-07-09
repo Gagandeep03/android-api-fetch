@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Margins -->
+    <dimen name="margin_gap_corner">16dp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!--    Text Sizes       -->
+    <dimen name="text_button_size">15sp</dimen>
+    <dimen name="text_appbar_title_size">20sp</dimen>
+
+    <!-- #####  PADDING  #########-->
+    <dimen name="edit_text_padding_size">8dp</dimen>
+    <dimen name="button_padding_top_bottom">3dp</dimen>
+
+    <dimen name="default_textsize">13sp</dimen>
+    <dimen name="material_chip_height">32dp</dimen>
+    <dimen name="min_horizontal_spacing">8dp</dimen>
+    <dimen name="vertical_spacing">8dp</dimen>
+</resources>

@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">NatureNine</string>
+    <string name="task_1">Task 1</string>
+    <string name="task_2">Task 2</string>
+    <string name="add_message_here">Add message here</string>
+
+    <string-array name="labels">
+        <item>One</item>
+        <item>Two</item>
+        <item>Three</item>
+        <item>Four</item>
+        <item>Five</item>
+    </string-array>
+</resources>
