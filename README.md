@@ -2,7 +2,7 @@
 This sample demonstrates the api fetching, displays the list of items and displays
 their detail on next fragment screen.
 
-## what demonstrates
+## What demonstrates
 * MVVM architecture model
 * DataBinding
 * RecyclerView
@@ -26,7 +26,7 @@ This sample use the Gradle build system.
 
 1. First download the samples by cloning this repository or downloading an archived snapshot. (See the options at the top of the page.)
 
-1. In Android Studio, use the "Import non-Android Studio project" or "Import Project" option. Next select one of the sample directories that you downloaded from this repository.
+1. In Android Studio, use the "Import Android Studio project" or "Import Project" option. Next select one of the sample directories that you downloaded from this repository.
 If prompted for a gradle configuration accept the default settings.
 
 To build the sample after you have applied the changes above, you can use the build/run option in Android Studio, or build directly from the command line if you prefer.
