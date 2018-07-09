@@ -1,7 +1,5 @@
 package com.androidsample.ui.activity.fragment.detailView;
 
-import com.androidsample.utils.schedulers.SchedulerProvider;
-
 import dagger.Module;
 import dagger.Provides;
 
@@ -10,7 +8,9 @@ import dagger.Provides;
 public class DetailFragmentModule {
 
     @Provides
-    public DetailFragmentViewModel provideViewModel(SchedulerProvider schedulerProvider) {
+    public DetailFragmentViewModel provideViewModel() {
         return new DetailFragmentViewModel();
     }
+
+
 }

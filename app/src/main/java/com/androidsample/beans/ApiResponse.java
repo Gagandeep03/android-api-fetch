@@ -21,6 +21,12 @@ public class ApiResponse {
     private int numResults;
     @SerializedName("results")
     private List<ResultsEntity> results;
+    /**
+     * message : Invalid authentication credentials
+     */
+
+    @SerializedName("message")
+    private String message;
 
     public String getStatus() {
         return status;
@@ -54,4 +60,11 @@ public class ApiResponse {
         this.results = results;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }

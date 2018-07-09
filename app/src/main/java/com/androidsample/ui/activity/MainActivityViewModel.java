@@ -51,6 +51,9 @@ public class MainActivityViewModel extends BaseViewModel<MainActivityPresenterVi
             switch (newFragmentType) {
                 case TASK_FIRST:
                     FirstFragment firstFragment = getFirstFragment();
+                    if (extras != null) {
+                        firstFragment.setArguments(extras);
+                    }
                     newFragment = firstFragment;
                     break;
                 case DETAIL_SCREEN:

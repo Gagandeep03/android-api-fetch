@@ -3,7 +3,6 @@ package com.androidsample.ui.activity.fragment.task1.adapter;
 import android.content.Context;
 import android.databinding.BindingAdapter;
 import android.databinding.ObservableField;
-import android.util.Log;
 import android.widget.ImageView;
 
 import com.androidsample.R;
@@ -19,9 +18,8 @@ public class ListItemViewModel {
     final int position;
     private final Context context;
     private String imageUrl;
-    private static int width,height;
     final ResultsEntity trayBean;
-    private final String TAG = ListItemViewModel.class.getSimpleName();
+    private final static String TAG = ListItemViewModel.class.getSimpleName();
     private final TrayItemModelListener listener;
     public ObservableField<String> tv_title = new ObservableField<>();
     public ObservableField<String> tv_writtenBy = new ObservableField<>();
@@ -42,20 +40,21 @@ public class ListItemViewModel {
         this.position = position;
         this.trayBean = model;
 
-
-        List<MediaEntity> mediaEntities = model.getMedia();
-        MediaEntity mediaEntity = mediaEntities.get(0);
-        List<MediametadataEntity> mediametadataEntities = mediaEntity.getMediametadata();
-        for (MediametadataEntity entity : mediametadataEntities) {
-            if (entity.getFormat().equalsIgnoreCase("Large Thumbnail")) {
-                setImageUrl(entity.getUrl());
-                break;
+        if (model != null) {
+            List<MediaEntity> mediaEntities = model.getMedia();
+            MediaEntity mediaEntity = mediaEntities.get(0);
+            List<MediametadataEntity> mediametadataEntities = mediaEntity.getMediametadata();
+            for (MediametadataEntity entity : mediametadataEntities) {
+                if (entity.getFormat().equalsIgnoreCase("Large Thumbnail")) {
+                    setImageUrl(entity.getUrl());
+                    break;
+                }
             }
-        }
 
-        tv_title.set(model.getTitle());
-        tv_writtenBy.set(model.getByline());
-        tv_displayTime.set(model.getPublishedDate());
+            tv_title.set(model.getTitle());
+            tv_writtenBy.set(model.getByline());
+            tv_displayTime.set(model.getPublishedDate());
+        }
 
     }
 
@@ -70,9 +69,8 @@ public class ListItemViewModel {
 
 
     public void onItemClick() {
-        Log.i(TAG, "onItemClick  ");
+
         if (listener != null) {
-            Log.d(TAG, "onItemClick  position " + position);
             listener.onItemClick(position, trayBean);
         }
     }

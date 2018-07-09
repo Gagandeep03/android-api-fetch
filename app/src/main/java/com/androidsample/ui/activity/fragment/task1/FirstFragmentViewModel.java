@@ -49,8 +49,12 @@ public class FirstFragmentViewModel extends BaseViewModel<FirstFragmentPresenter
         return new DisposableObserver<ApiResponse>() {
             @Override
             public void onNext(ApiResponse apiResponse) {
-                if (apiResponse != null && apiResponse.getStatus().equalsIgnoreCase("OK")) {
+                if (apiResponse != null) {
+                    if (apiResponse.getStatus() != null && apiResponse.getStatus().equalsIgnoreCase("OK"))
                     list = apiResponse.getResults();
+                    else if (apiResponse.getMessage() != null) {
+                        getmNavigator().showToast(apiResponse.getMessage());
+                    }
                 }
             }
 
@@ -63,6 +67,9 @@ public class FirstFragmentViewModel extends BaseViewModel<FirstFragmentPresenter
             public void onComplete() {
                 if (list != null && list.size() > 0)
                     getmNavigator().setAdapter(list);
+                else {
+                    getmNavigator().showToast(getmNavigator().getStringIds(R.string.error_api_response));
+                }
             }
         };
     }
