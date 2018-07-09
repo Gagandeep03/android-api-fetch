@@ -17,4 +17,14 @@
 
     <color name="deselected_color">#aaffaa</color>
     <color name="deselected_font_color">#339933</color>
+
+    <!--Text Color section-->
+    <color name="primary_text">#1e1e1e</color>
+    <color name="secondary_text">#757575</color>
+
+    <!-- Grey text color -->
+    <color name="primary_grey_text">#444A49</color>
+    <color name="secondary_gray">#575C5C</color>
+    <color name="secondary_light_gray">#c3c3c3</color>
+    <color name="transparent">#00000000</color>
 </resources>

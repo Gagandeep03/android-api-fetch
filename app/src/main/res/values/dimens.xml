@@ -8,13 +8,24 @@
     <!--    Text Sizes       -->
     <dimen name="text_button_size">15sp</dimen>
     <dimen name="text_appbar_title_size">20sp</dimen>
+    <dimen name="text_subheading_size">17sp</dimen>
+    <dimen name="text_standard_size">15sp</dimen>
+    <dimen name="text_mid_standard_size">13sp</dimen>
+    <dimen name="text_heading_size">19sp</dimen>
+    <dimen name="text_small_size">11sp</dimen>
 
     <!-- #####  PADDING  #########-->
-    <dimen name="edit_text_padding_size">8dp</dimen>
-    <dimen name="button_padding_top_bottom">3dp</dimen>
+    <dimen name="padding_top_bottom_chat_list_item">12dp</dimen>
+    <dimen name="padding_left_right_chat_list_item">6dp</dimen>
 
     <dimen name="default_textsize">13sp</dimen>
     <dimen name="material_chip_height">32dp</dimen>
     <dimen name="min_horizontal_spacing">8dp</dimen>
     <dimen name="vertical_spacing">8dp</dimen>
+    <dimen name="margin_8dp">8dp</dimen>
+    <dimen name="activity_margin_16">16dp</dimen>
+    <dimen name="avatar_list_item_height">36dp</dimen>
+    <dimen name="list_image_size">48dp</dimen>
+
+
 </resources>

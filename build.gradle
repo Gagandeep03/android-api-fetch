@@ -42,5 +42,7 @@ ext{
 
     jakeRxVersion='2.0.0'
 
+    mockitoVersion = '2.7.1'
+
 
 }

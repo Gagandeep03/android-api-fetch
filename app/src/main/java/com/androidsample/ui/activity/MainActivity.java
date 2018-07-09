@@ -16,7 +16,7 @@ import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 
-import static com.androidsample.enums.FragmentAvailable.HOME_SCREEN;
+import static com.androidsample.enums.FragmentAvailable.TASK_FIRST;
 
 public class MainActivity extends BaseActivity<ActivityHomeBinding, MainActivityViewModel>
         implements HasSupportFragmentInjector, MainActivityPresenterView.View {
@@ -35,7 +35,7 @@ public class MainActivity extends BaseActivity<ActivityHomeBinding, MainActivity
         viewModel.setmNavigator(this);
 
         // Call Login Screen default
-        changeCurrentFragment(HOME_SCREEN, null, false, true);
+        changeCurrentFragment(FragmentAvailable.TASK_FIRST, null, false, true);
     }
 
     @Override
@@ -95,7 +95,7 @@ public class MainActivity extends BaseActivity<ActivityHomeBinding, MainActivity
      */
     @Override
     public void onBackPressed() {
-        if (viewModel.getCurrentFragment() == HOME_SCREEN) {
+        if (viewModel.getCurrentFragment() == TASK_FIRST) {
             finish();
             System.exit(0);//  super.onBackPressed();
         }else oneStepBack();

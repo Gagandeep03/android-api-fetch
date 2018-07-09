@@ -2,13 +2,11 @@
     <string name="app_name">AndroidSample</string>
     <string name="task_1">Task 1</string>
     <string name="task_2">Task 2</string>
+    <string name="error_invalid_date_key">Add date and api key.</string>
+    <string name="error_api_response">Api response error</string>
 
 
-    <string-array name="labels">
-        <item>One</item>
-        <item>Two</item>
-        <item>Three</item>
-        <item>Four</item>
-        <item>Five</item>
-    </string-array>
+    <string name="section_string">Section: <b>%1$s</b></string>
+    <string name="view_count">View count: %1$s</string>
+    <string name="source_string">Source:  %1$s</string>
 </resources>

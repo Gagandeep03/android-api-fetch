@@ -3,17 +3,21 @@ package com.androidsample.ui.baseclass;
 import android.arch.lifecycle.ViewModel;
 import android.databinding.ObservableBoolean;
 
-/**
- * Created by Gagandeep on 19-09-2017.
- */
+import com.androidsample.utils.schedulers.SchedulerProvider;
+
+import io.reactivex.disposables.CompositeDisposable;
+
 
 public abstract class BaseViewModel<N>  extends ViewModel {
 
-
     private final ObservableBoolean mIsLoading = new ObservableBoolean(false);
-
+    private SchedulerProvider mSchedulerProvider;
     private N mNavigator;
+    private CompositeDisposable mCompositeDisposable;
 
+    public BaseViewModel(SchedulerProvider mSchedulerProvider) {
+        this.mSchedulerProvider = mSchedulerProvider;
+    }
 
     public BaseViewModel() {
 
@@ -27,17 +31,26 @@ public abstract class BaseViewModel<N>  extends ViewModel {
         this.mNavigator = mNavigator;
     }
 
-
+    public void setmSchedulerProvider(SchedulerProvider mSchedulerProvider) {
+        this.mSchedulerProvider = mSchedulerProvider;
+    }
 
     public void onViewCreated() {
-
+        this.mCompositeDisposable = new CompositeDisposable();
     }
 
     public void onDestroyView() {
-
+        if (mCompositeDisposable != null && !mCompositeDisposable.isDisposed())
+            mCompositeDisposable.dispose();
     }
 
+    public SchedulerProvider getSchedulerProvider() {
+        return mSchedulerProvider;
+    }
 
+    public CompositeDisposable getCompositeDisposable() {
+        return mCompositeDisposable;
+    }
 
     public ObservableBoolean getIsLoading() {
         return mIsLoading;

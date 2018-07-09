@@ -22,9 +22,7 @@ import android.widget.Toast;
 import com.androidsample.enums.FragmentAvailable;
 
 
-/**
- * Created by Gagandeep on 19-09-2017.
- */
+
 
 public abstract class BaseActivity<T extends ViewDataBinding,V extends BaseViewModel>
         extends AppCompatActivity implements BaseFragment.Callback{
@@ -160,6 +158,7 @@ public abstract class BaseActivity<T extends ViewDataBinding,V extends BaseViewM
         fragment.setArguments(bundle);
         FragmentTransaction fts = getSupportFragmentManager().beginTransaction();
         fts.replace(container, fragment, fragment.getClass().getSimpleName());
+        fts.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         if (isBackStack)
             fts.addToBackStack(fragment.getClass().getSimpleName());
         fts.commit();
@@ -169,6 +168,7 @@ public abstract class BaseActivity<T extends ViewDataBinding,V extends BaseViewM
         FragmentTransaction fts = getSupportFragmentManager().beginTransaction();
         fragment.setArguments(bundle);
         fts.add(container, fragment, fragment.getClass().getSimpleName());
+        fts.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         if (isBackStack)
             fts.addToBackStack(fragment.getClass().getSimpleName());
         fts.commit();

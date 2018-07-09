@@ -13,12 +13,12 @@ import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
 
 
-
 public class GlobalApp extends MultiDexApplication implements HasActivityInjector {
 
 
     @Inject
     DispatchingAndroidInjector<Activity> activityDispatchingAndroidInjector;
+
     @Override
     public void onCreate() {
         super.onCreate();

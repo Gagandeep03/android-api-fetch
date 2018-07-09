@@ -1,13 +1,16 @@
 package com.androidsample.di.module;
 
 import android.app.Application;
-import android.content.Context;
 
+import com.androidsample.api.ApiInterface;
 import com.androidsample.di.qualifer.ApplicationContext;
+import com.androidsample.utils.schedulers.SchedulerProvider;
+
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-
+import retrofit2.Retrofit;
 
 
 @Module
@@ -17,8 +20,21 @@ public class AppModule {
 
     @Provides
     @ApplicationContext
-    Context provideApplicationContext(Application application) {
+    Application provideApplicationContext(Application application) {
         return application;
+    }
+
+    @Provides
+    @Singleton
+    SchedulerProvider provideSchedulerProvider() {
+        return new SchedulerProvider();
+    }
+
+
+    @Provides
+    @Singleton
+    ApiInterface provideApiInterface(Retrofit retrofit) {
+        return retrofit.create(ApiInterface.class);
     }
 }
 

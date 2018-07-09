@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="RtlHardcoded">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.androidsample.ui.activity.fragment.task1.adapter.ListItemViewModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:onClick="@{() -> viewModel.onItemClick()}"
+        android:paddingBottom="@dimen/padding_top_bottom_chat_list_item"
+        android:paddingLeft="@dimen/padding_left_right_chat_list_item"
+        android:paddingRight="@dimen/padding_left_right_chat_list_item"
+        android:paddingTop="@dimen/padding_top_bottom_chat_list_item">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/image_arrow_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_arrow_right_grey_24dp" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_date_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv__writtenBy"
+            android:layout_marginEnd="@dimen/margin_8dp"
+            android:layout_marginRight="@dimen/margin_8dp"
+            android:layout_toLeftOf="@+id/image_arrow_right"
+            android:layout_toStartOf="@+id/image_arrow_right"
+            android:gravity="center_vertical"
+            android:text="@{viewModel.tv_displayTime}"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/text_small_size"
+            app:autoSizeMinTextSize="@dimen/text_small_size"
+            app:textAllCaps="true" />
+
+        <ImageView
+            android:id="@+id/image_article"
+            android:layout_width="@dimen/list_image_size"
+            android:layout_height="@dimen/list_image_size"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="@dimen/margin_8dp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:minHeight="@dimen/avatar_list_item_height"
+            android:minWidth="@dimen/avatar_list_item_height"
+            android:scaleType="fitCenter"
+            bind:imageUrl="@{viewModel.imageUrl}" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_margin_16"
+            android:layout_marginStart="@dimen/activity_margin_16"
+            android:layout_toEndOf="@+id/image_article"
+            android:layout_toLeftOf="@+id/tv_date_time"
+            android:layout_toRightOf="@+id/image_article"
+            android:layout_toStartOf="@+id/tv_date_time"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{viewModel.tv_title}"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/text_mid_standard_size"
+            app:autoSizeTextType="none" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv__writtenBy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv_title"
+            android:layout_below="@+id/tv_title"
+            android:layout_marginLeft="0dp"
+            android:layout_marginStart="0dp"
+            android:layout_toLeftOf="@+id/tv_date_time"
+            android:layout_toStartOf="@+id/tv_date_time"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{viewModel.tv_writtenBy}"
+            android:textColor="@color/secondary_gray"
+            android:textSize="@dimen/text_small_size" />
+
+    </RelativeLayout>
+</layout>

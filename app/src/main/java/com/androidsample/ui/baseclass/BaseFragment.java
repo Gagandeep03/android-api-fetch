@@ -18,9 +18,6 @@ import android.view.ViewGroup;
 
 import com.androidsample.enums.FragmentAvailable;
 
-/**
- * Created by Gagandeep on 19-09-2017.
- */
 
 public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseViewModel> extends Fragment {
 

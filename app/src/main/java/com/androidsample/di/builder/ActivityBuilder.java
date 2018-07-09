@@ -19,7 +19,7 @@ package com.androidsample.di.builder;
 
 import com.androidsample.ui.activity.MainActivity;
 import com.androidsample.ui.activity.MainActivityModule;
-import com.androidsample.ui.activity.fragment.HomeFragment.MainFragmentProvider;
+import com.androidsample.ui.activity.fragment.detailView.DetailFragmentProvider;
 import com.androidsample.ui.activity.fragment.task1.FirstFragmentProvider;
 
 import dagger.Module;
@@ -30,7 +30,7 @@ import dagger.android.ContributesAndroidInjector;
 public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules = {MainActivityModule.class, FirstFragmentProvider.class,
-            MainFragmentProvider.class})
+            DetailFragmentProvider.class})
     abstract MainActivity bindMainActivity();
 
 }

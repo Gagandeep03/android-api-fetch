@@ -1,19 +1,18 @@
 package com.androidsample.ui.activity.fragment.task1;
 
-import android.arch.lifecycle.Observer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.android.databinding.library.baseAdapters.BR;
 import com.androidsample.R;
-import com.androidsample.beans.ListBeanModel;
+import com.androidsample.beans.ResultsEntity;
 import com.androidsample.databinding.FragmentTaskoneBinding;
+import com.androidsample.enums.FragmentAvailable;
 import com.androidsample.ui.activity.fragment.task1.adapter.ListAdapter;
 import com.androidsample.ui.baseclass.BaseFragment;
+import com.androidsample.utils.ConstantFile;
 
 import java.util.List;
 
@@ -21,25 +20,18 @@ import javax.inject.Inject;
 
 import dagger.android.support.AndroidSupportInjection;
 
-/**
- * Created by Gagandeep on 16-06-2018.
- */
-public class FirstFragment extends BaseFragment<FragmentTaskoneBinding, FirstFragmentViewModel> implements
-        FirstFragmentPresenterView.View, ListAdapter.DisplayNameInterface {
 
+public class FirstFragment extends BaseFragment<FragmentTaskoneBinding, FirstFragmentViewModel> implements
+        FirstFragmentPresenterView.View, ListAdapter.ItemModelListener {
+
+    private final String TAG = FirstFragment.class
+            .getSimpleName();
     @Inject
     FirstFragmentViewModel viewModel;
     @Inject
     ListAdapter adapter;
     FragmentTaskoneBinding binding;
-    // Create the observer which updates the UI.
-    final Observer<String> nameObserver = new Observer<String>() {
-        @Override
-        public void onChanged(@Nullable final String newName) {
-            // Update the UI, in this case, a TextView.
-            binding.tvDisplayName.setText(newName);
-        }
-    };
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,44 +39,28 @@ public class FirstFragment extends BaseFragment<FragmentTaskoneBinding, FirstFra
         super.onCreate(savedInstanceState);
         this.setRetainInstance(true);
         viewModel.setmNavigator(this);
-
+        adapter.setItemListener(this);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding = getViewDataBinding();
-        adapter.setDisplaySelectionListener(this);
-        setRecyclerView();
-        addObserver();
-        viewModel.calculateRecyclerView();
-
-    }
-
-    private void addObserver() {
-        viewModel.getCurrentName().observe(this, nameObserver);
-    }
-
-    /**
-     * Set RecyclerView Settings
-     */
-    private void setRecyclerView() {
-        DividerItemDecoration decoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.HORIZONTAL);
-        decoration.setDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.shape_divider_list_item));
-        binding.recyclerView.addItemDecoration(decoration);
-        binding.recyclerView.setHasFixedSize(true);
         binding.recyclerView.setAdapter(adapter);
+
+        viewModel.loadApi(ConstantFile.API_DATE, ConstantFile.API_KEY);
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setCurrentFragment(FragmentAvailable.TASK_FIRST);
     }
 
     @Override
-    public RecyclerView getRecyclerView() {
-        return binding.recyclerView;
-    }
-
-    @Override
-    public void setAdapter(List<ListBeanModel> list) {
+    public void setAdapter(List<ResultsEntity> list) {
         adapter.updateList(list);
-        adapter.setSelectedItem(adapter.getItemCount() - 1);
     }
 
     @Override
@@ -107,14 +83,26 @@ public class FirstFragment extends BaseFragment<FragmentTaskoneBinding, FirstFra
         AndroidSupportInjection.inject(this);
     }
 
+
     @Override
-    public void setAdapterSelectItem(int setColorDate) {
-        if (adapter != null)
-            adapter.setSelectedItem(setColorDate);
+    public void onItemClick(int position, ResultsEntity bean) {
+        Log.d(TAG, "Item click position " + position);
+        if (position >= 0) {
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("item", bean);
+
+            changeCurrentFragment(FragmentAvailable.DETAIL_SCREEN, bundle, true, true);
+        }
+
     }
 
     @Override
-    public void showSelectedName(String name) {
-        viewModel.updateSelectedName(name);
+    public void showToast(String message) {
+        super.showToast(message);
+    }
+
+    @Override
+    public String getStringIds(int stringId) {
+        return getString(stringId);
     }
 }

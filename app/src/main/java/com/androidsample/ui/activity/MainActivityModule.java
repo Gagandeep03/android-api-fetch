@@ -17,12 +17,12 @@ public class MainActivityModule {
      * Inject this to {@link MainActivity
      * }
      *
-     * @param context
+     *
      * @param
      * @return
      */
     @Provides
-    public MainActivityViewModel provideModule(@ActivityContext Context context) {
+    public MainActivityViewModel provideModule() {
         return new MainActivityViewModel();
     }
 

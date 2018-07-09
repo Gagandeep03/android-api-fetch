@@ -7,13 +7,13 @@ import android.support.v4.app.Fragment;
 
 import com.androidsample.R;
 import com.androidsample.enums.FragmentAvailable;
-import com.androidsample.ui.activity.fragment.HomeFragment.MainFragment;
+import com.androidsample.ui.activity.fragment.detailView.DetailFragment;
 import com.androidsample.ui.activity.fragment.task1.FirstFragment;
 import com.androidsample.ui.baseclass.BaseViewModel;
 
-import static com.androidsample.enums.FragmentAvailable.HOME_SCREEN;
+import static com.androidsample.enums.FragmentAvailable.DETAIL_SCREEN;
 import static com.androidsample.enums.FragmentAvailable.TASK_FIRST;
-import static com.androidsample.enums.FragmentAvailable.TASK_TWO;
+
 
 
 public class MainActivityViewModel extends BaseViewModel<MainActivityPresenterView.View> implements MainActivityPresenterView.Presenter {
@@ -29,7 +29,6 @@ public class MainActivityViewModel extends BaseViewModel<MainActivityPresenterVi
     @FragmentAvailable
     int newFragment;
 
-    MainFragment mainFragment;
 
     public MainActivityViewModel() {
         super();
@@ -50,18 +49,16 @@ public class MainActivityViewModel extends BaseViewModel<MainActivityPresenterVi
             newFragment = newFragmentType;
             Fragment newFragment = null;
             switch (newFragmentType) {
-                case HOME_SCREEN:
-                    mainFragment = getMainFragment();
-                    if (extras != null)
-                        mainFragment.setArguments(extras);
-                    newFragment = mainFragment;
-                    break;
                 case TASK_FIRST:
-                    FirstFragment firstFragment = new FirstFragment();
+                    FirstFragment firstFragment = getFirstFragment();
                     newFragment = firstFragment;
                     break;
-                case TASK_TWO:
-
+                case DETAIL_SCREEN:
+                    DetailFragment detailFragment = getDetailFragment();
+                    if (extras != null) {
+                        detailFragment.setArguments(extras);
+                    }
+                    newFragment = detailFragment;
                     break;
 
             }
@@ -94,7 +91,11 @@ public class MainActivityViewModel extends BaseViewModel<MainActivityPresenterVi
         this.isToolbarVisible.set(isToolbarVisible);
     }
 
-    MainFragment getMainFragment() {
-        return new MainFragment();
+    DetailFragment getDetailFragment() {
+        return new DetailFragment();
+    }
+
+    FirstFragment getFirstFragment() {
+        return new FirstFragment();
     }
 }

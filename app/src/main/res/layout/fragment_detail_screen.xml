@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.androidsample.ui.activity.fragment.detailView.DetailFragmentViewModel" />
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        tools:context=".ui.activity.MainActivity">
+
+        <include
+            android:id="@+id/inc_toolbar"
+            layout="@layout/detail_screen_appbar"
+            app:viewModel="@{viewModel}" />
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/activity_margin_16"
+            android:layout_marginRight="@dimen/activity_margin_16"
+            android:fillViewport="true"
+            android:fitsSystemWindows="true"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbars="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="@{viewModel.observer_title}"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/text_appbar_title_size" />
+
+                <TextView
+                    android:id="@+id/tv_abstract"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_title"
+                    android:layout_marginTop="@dimen/margin_8dp"
+                    android:ellipsize="end"
+                    android:maxLines="5"
+                    android:text="@{viewModel.observer_abstract}"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/text_subheading_size" />
+
+                <TextView
+                    android:id="@+id/tv_source"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/tv_abstract"
+                    android:layout_marginTop="@dimen/margin_8dp"
+                    android:maxLines="1"
+                    android:text="@{viewModel.observer_source}"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/text_standard_size" />
+
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/tv_source"
+                    android:layout_alignParentRight="true"
+                    android:maxLines="1"
+                    android:text="@{viewModel.observer_date}"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/text_standard_size" />
+
+                <TextView
+                    android:id="@+id/tv_section"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/tv_source"
+                    android:layout_marginTop="@dimen/margin_8dp"
+                    android:maxLines="1"
+                    android:text="@{viewModel.observer_section}"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/text_standard_size"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tv_viewCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/tv_section"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/tv_source"
+                    android:layout_marginTop="@dimen/margin_8dp"
+                    android:maxLines="1"
+                    android:text="@{viewModel.observer_views_count}"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/text_standard_size" />
+
+                <TextView
+                    android:id="@+id/tv__writtenBy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/tv_viewCount"
+                    android:layout_marginTop="@dimen/activity_margin_16"
+                    android:maxLines="1"
+                    android:text="@{viewModel.observer_writtenBy}"
+                    android:textColor="@color/primary_grey_text"
+                    android:textSize="@dimen/text_standard_size"
+                    android:textStyle="italic" />
+
+
+            </RelativeLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.design.widget.CoordinatorLayout>
+</layout>
