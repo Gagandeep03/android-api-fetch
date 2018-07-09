@@ -9,7 +9,6 @@ import com.naturenine.R;
 import com.naturenine.enums.FragmentAvailable;
 import com.naturenine.ui.activity.fragment.HomeFragment.MainFragment;
 import com.naturenine.ui.activity.fragment.task1.FirstFragment;
-import com.naturenine.ui.activity.fragment.task2.SecondFragment;
 import com.naturenine.ui.baseclass.BaseViewModel;
 
 import static com.naturenine.enums.FragmentAvailable.HOME_SCREEN;
@@ -62,8 +61,7 @@ public class MainActivityViewModel extends BaseViewModel<MainActivityPresenterVi
                     newFragment = firstFragment;
                     break;
                 case TASK_TWO:
-                    SecondFragment secondFragment = new SecondFragment();
-                    newFragment = secondFragment;
+
                     break;
 
             }
