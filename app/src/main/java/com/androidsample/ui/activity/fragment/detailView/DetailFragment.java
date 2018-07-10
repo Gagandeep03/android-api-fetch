@@ -9,7 +9,7 @@ import com.androidsample.R;
 import com.androidsample.beans.ResultsEntity;
 import com.androidsample.databinding.FragmentDetailScreenBinding;
 import com.androidsample.di.module.GlideApp;
-import com.androidsample.enums.FragmentAvailable;
+import com.androidsample.fragmentId.FragmentAvailable;
 import com.androidsample.ui.baseclass.BaseFragment;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 

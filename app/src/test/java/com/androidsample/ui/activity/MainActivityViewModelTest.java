@@ -4,7 +4,7 @@ import android.databinding.ObservableBoolean;
 import android.os.Bundle;
 
 import com.androidsample.R;
-import com.androidsample.enums.FragmentAvailable;
+import com.androidsample.fragmentId.FragmentAvailable;
 import com.androidsample.ui.activity.fragment.detailView.DetailFragment;
 import com.androidsample.ui.activity.fragment.task1.FirstFragment;
 import com.androidsample.utils.schedulers.SchedulerProvider;

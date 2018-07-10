@@ -9,7 +9,7 @@ import com.android.databinding.library.baseAdapters.BR;
 import com.androidsample.R;
 import com.androidsample.beans.ResultsEntity;
 import com.androidsample.databinding.FragmentTaskoneBinding;
-import com.androidsample.enums.FragmentAvailable;
+import com.androidsample.fragmentId.FragmentAvailable;
 import com.androidsample.ui.activity.fragment.task1.adapter.ListAdapter;
 import com.androidsample.ui.baseclass.BaseFragment;
 import com.androidsample.utils.ConstantFile;

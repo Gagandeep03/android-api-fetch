@@ -57,9 +57,9 @@
             android:layout_height="@dimen/list_image_size"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:layout_marginLeft="@dimen/margin_8dp"
             android:gravity="center"
-            android:maxLines="1"
             android:minHeight="@dimen/avatar_list_item_height"
             android:minWidth="@dimen/avatar_list_item_height"
             android:scaleType="fitCenter"
@@ -75,12 +75,12 @@
             android:layout_toLeftOf="@+id/tv_date_time"
             android:layout_toRightOf="@+id/image_article"
             android:layout_toStartOf="@+id/tv_date_time"
+            android:layout_alignParentTop="true"
             android:ellipsize="end"
             android:maxLines="2"
             android:text="@{viewModel.tv_title}"
             android:textColor="@color/primary_text"
-            android:textSize="@dimen/text_mid_standard_size"
-            app:autoSizeTextType="none" />
+            android:textSize="@dimen/text_mid_standard_size" />
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tv__writtenBy"

@@ -1,4 +1,4 @@
-package com.androidsample.enums;
+package com.androidsample.fragmentId;
 
 import android.support.annotation.IntDef;
 

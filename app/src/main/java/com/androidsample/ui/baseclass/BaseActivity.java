@@ -19,7 +19,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
-import com.androidsample.enums.FragmentAvailable;
+import com.androidsample.fragmentId.FragmentAvailable;
 
 
 

@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import com.androidsample.BR;
 import com.androidsample.R;
 import com.androidsample.databinding.ActivityHomeBinding;
-import com.androidsample.enums.FragmentAvailable;
+import com.androidsample.fragmentId.FragmentAvailable;
 import com.androidsample.ui.baseclass.BaseActivity;
 
 import javax.inject.Inject;
@@ -16,7 +16,7 @@ import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 
-import static com.androidsample.enums.FragmentAvailable.TASK_FIRST;
+import static com.androidsample.fragmentId.FragmentAvailable.TASK_FIRST;
 
 public class MainActivity extends BaseActivity<ActivityHomeBinding, MainActivityViewModel>
         implements HasSupportFragmentInjector, MainActivityPresenterView.View {

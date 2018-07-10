@@ -6,13 +6,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.androidsample.R;
-import com.androidsample.enums.FragmentAvailable;
+import com.androidsample.fragmentId.FragmentAvailable;
 import com.androidsample.ui.activity.fragment.detailView.DetailFragment;
 import com.androidsample.ui.activity.fragment.task1.FirstFragment;
 import com.androidsample.ui.baseclass.BaseViewModel;
 
-import static com.androidsample.enums.FragmentAvailable.DETAIL_SCREEN;
-import static com.androidsample.enums.FragmentAvailable.TASK_FIRST;
+import static com.androidsample.fragmentId.FragmentAvailable.DETAIL_SCREEN;
+import static com.androidsample.fragmentId.FragmentAvailable.TASK_FIRST;
 
 
 
