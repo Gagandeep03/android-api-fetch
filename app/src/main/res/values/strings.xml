@@ -8,4 +8,7 @@
     <string name="section_string">Section: <b>%1$s</b></string>
     <string name="view_count">View count: %1$s</string>
     <string name="source_string">Source:  %1$s</string>
+    <string name="error_network_failed">Network error, please try later.</string>
+    <string name="no_record_found">No record found.</string>
+
 </resources>

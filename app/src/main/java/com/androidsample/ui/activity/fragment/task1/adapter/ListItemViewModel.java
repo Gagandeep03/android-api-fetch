@@ -6,45 +6,37 @@ import android.databinding.ObservableField;
 import android.widget.ImageView;
 
 import com.androidsample.R;
-import com.androidsample.beans.MediaEntity;
-import com.androidsample.beans.MediametadataEntity;
-import com.androidsample.beans.ResultsEntity;
+import com.androidsample.beans.MediaLiveBean;
+import com.androidsample.beans.ResultLiveBean;
 import com.androidsample.di.module.GlideApp;
+import com.androidsample.roomdatabase.tables.MediaMetadataEntity;
 
 import java.util.List;
 
 
 public class ListItemViewModel {
-    final int position;
-    private final Context context;
-    private String imageUrl;
-    final ResultsEntity trayBean;
     private final static String TAG = ListItemViewModel.class.getSimpleName();
+    final int position;
+    final ResultLiveBean trayBean;
+    private final Context context;
     private final TrayItemModelListener listener;
     public ObservableField<String> tv_title = new ObservableField<>();
     public ObservableField<String> tv_writtenBy = new ObservableField<>();
     public ObservableField<String> tv_displayTime = new ObservableField<>();
+    private String imageUrl;
 
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public ListItemViewModel(Context context, ResultsEntity model, TrayItemModelListener listener, int position) {
+    public ListItemViewModel(Context context, ResultLiveBean model, TrayItemModelListener listener, int position) {
         this.context = context;
         this.listener = listener;
         this.position = position;
         this.trayBean = model;
 
         if (model != null) {
-            List<MediaEntity> mediaEntities = model.getMedia();
-            MediaEntity mediaEntity = mediaEntities.get(0);
-            List<MediametadataEntity> mediametadataEntities = mediaEntity.getMediametadata();
-            for (MediametadataEntity entity : mediametadataEntities) {
+            List<MediaLiveBean> mediaEntities = model.getMediaEntities();
+            MediaLiveBean mediaEntity = mediaEntities.get(0);
+            List<MediaMetadataEntity> mediametadataEntities = mediaEntity.getMediaMetadataEntities();
+            for (MediaMetadataEntity entity : mediametadataEntities) {
                 if (entity.getFormat().equalsIgnoreCase("Large Thumbnail")) {
                     setImageUrl(entity.getUrl());
                     break;
@@ -67,6 +59,13 @@ public class ListItemViewModel {
                 .into(view);
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
     public void onItemClick() {
 
@@ -76,7 +75,7 @@ public class ListItemViewModel {
     }
 
     public interface TrayItemModelListener {
-        void onItemClick(int position, ResultsEntity bean);
+        void onItemClick(int position, ResultLiveBean bean);
     }
 
 }

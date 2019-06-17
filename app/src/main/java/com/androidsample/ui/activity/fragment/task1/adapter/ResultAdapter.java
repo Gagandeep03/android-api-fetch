@@ -1,32 +1,39 @@
 package com.androidsample.ui.activity.fragment.task1.adapter;
 
+import android.arch.paging.PagedListAdapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.androidsample.beans.ResultsEntity;
+import com.androidsample.beans.ResultLiveBean;
 import com.androidsample.databinding.DetailListItemViewBinding;
 import com.androidsample.ui.baseclass.BaseViewHolder;
 
-import java.util.List;
+public class ResultAdapter extends PagedListAdapter<ResultLiveBean, BaseViewHolder> {
 
 
-public class ListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
-
-    DetailListItemViewBinding binding;
     private final Context context;
-    ItemModelListener itemClickInterface;
-    private List<ResultsEntity> modelList;
+    DetailListItemViewBinding binding;
+    private ResultAdapter.ItemModelListener itemClickInterface;
 
-    public ListAdapter(Context context, List<ResultsEntity> modelList) {
-        this.modelList = modelList;
+    public ResultAdapter(Context context) {
+        super(ResultLiveBean.DIFF_CALLBACK);
         this.context = context;
     }
 
-    public void setItemListener(ItemModelListener interfaceObj) {
+    public void setItemListener(ResultAdapter.ItemModelListener interfaceObj) {
         this.itemClickInterface = interfaceObj;
+    }
+
+    @Override
+    public void onBindViewHolder(BaseViewHolder holder, int position) {
+        holder.onBind(position);
+    }
+
+    @Override
+    public int getItemCount() {
+        return getCurrentList() == null ? 0 : getCurrentList().size();
     }
 
     @NonNull
@@ -34,29 +41,12 @@ public class ListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         binding = DetailListItemViewBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
 
-        return new ItemViewHolder(binding);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
-        holder.onBind(position);
-    }
-
-    @Override
-    public int getItemCount() {
-        return modelList == null ? 0 : modelList.size();
-    }
-
-
-    public void updateList(List<ResultsEntity> list) {
-        modelList = list;
-        notifyItemRangeChanged(0, list.size(), list);
-        // notifyDataSetChanged();
+        return new ResultAdapter.ItemViewHolder(binding);
     }
 
 
     public interface ItemModelListener {
-        void onItemClick(int position, ResultsEntity bean);
+        void onItemClick(int position, ResultLiveBean bean);
     }
 
     public class ItemViewHolder extends BaseViewHolder implements ListItemViewModel.TrayItemModelListener {
@@ -70,14 +60,14 @@ public class ListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
         @Override
         public void onBind(int position) {
-            ResultsEntity model = modelList.get(position);
+            ResultLiveBean model = getCurrentList().get(position);
             itemViewModel = new ListItemViewModel(context, model, this, position);
             binding.setViewModel(itemViewModel);
             binding.executePendingBindings();
         }
 
         @Override
-        public void onItemClick(int position, ResultsEntity bean) {
+        public void onItemClick(int position, ResultLiveBean bean) {
             if (itemClickInterface != null) {
                 itemClickInterface.onItemClick(position, bean);
             }

@@ -1,13 +1,21 @@
-package com.androidsample.beans;
+package com.androidsample.roomdatabase.tables;
 
+
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.Index;
+import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.androidsample.roomdatabase.TableConstants;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity(indices = {@Index(value = TableConstants.RESULT_ID, unique = true)})
 public class ResultsEntity implements Parcelable {
 
     public static final Parcelable.Creator<ResultsEntity> CREATOR = new Parcelable.Creator<ResultsEntity>() {
@@ -21,51 +29,34 @@ public class ResultsEntity implements Parcelable {
             return new ResultsEntity[size];
         }
     };
-    /**
-     * url : https://www.nytimes.com/2018/07/01/world/americas/mexico-election-andres-manuel-lopez-obrador.html
-     * adx_keywords : Lopez Obrador, Andres Manuel;Pena Nieto, Enrique;Politics and Government;Elections;Corruption (Institutional);Mexico;Institutional Revolutionary Party (Mexico);Economic Conditions and Trends;National Action Party (Mexico);Latin America
-     * column : null
-     * section : World
-     * byline : By AZAM AHMED and PAULINA VILLEGAS
-     * type : Article
-     * title : López Obrador, an Atypical Leftist, Wins Mexico Presidency in Landslide
-     * abstract : Andrés Manuel López Obrador’s victory, fueled by a wave of voter anger, upended the political establishment, filling millions of Mexicans with hope — and the nation’s elites with trepidation.
-     * published_date : 2018-07-01
-     * source : The New York Times
-     * id : 100000005985408
-     * asset_id : 100000005985408
-     * views : 1
-     * des_facet : ["POLITICS AND GOVERNMENT","ELECTIONS","CORRUPTION (INSTITUTIONAL)","ECONOMIC CONDITIONS AND TRENDS"]
-     * org_facet : ["INSTITUTIONAL REVOLUTIONARY PARTY (MEXICO)","NATIONAL ACTION PARTY (MEXICO)"]
-     * per_facet : ["LOPEZ OBRADOR, ANDRES MANUEL","PENA NIETO, ENRIQUE"]
-     * geo_facet : ["MEXICO","LATIN AMERICA"]
-     * media : [{"type":"image","subtype":"photo","caption":"Andrés Manuel López Obrador campaigned on a narrative of social change, including increased pensions for the elderly, educational grants for Mexico\u2019s youth and additional support for farmers.","copyright":"Manuel Velasquez/Getty Images","approved_for_syndication":1,"media-metadata":[{"url":"https://static01.nyt.com/images/2018/07/02/world/02mexico-top/02mexico-top-square320.jpg","format":"square320","height":320,"width":320},{"url":"https://static01.nyt.com/images/2018/07/02/world/02mexico-top/02mexico-top-thumbStandard.jpg","format":"Standard Thumbnail","height":75,"width":75},{"url":"https://static01.nyt.com/images/2018/07/02/world/02mexico-top/merlin_140627415_dc13f473-7d2b-4997-803b-0cb1c54c8653-articleInline.jpg","format":"Normal","height":127,"width":190},{"url":"https://static01.nyt.com/images/2018/07/02/world/02mexico-top/merlin_140627415_dc13f473-7d2b-4997-803b-0cb1c54c8653-sfSpan.jpg","format":"Large","height":263,"width":395},{"url":"https://static01.nyt.com/images/2018/07/02/world/02mexico-top/merlin_140627415_dc13f473-7d2b-4997-803b-0cb1c54c8653-jumbo.jpg","format":"Jumbo","height":683,"width":1024},{"url":"https://static01.nyt.com/images/2018/07/02/world/02mexico-top/merlin_140627415_dc13f473-7d2b-4997-803b-0cb1c54c8653-superJumbo.jpg","format":"superJumbo","height":1366,"width":2048},{"url":"https://static01.nyt.com/images/2018/07/02/world/02mexico-top/02mexico-top-square640.jpg","format":"square640","height":640,"width":640},{"url":"https://static01.nyt.com/images/2018/07/02/world/02mexico-top/02mexico-top-thumbLarge.jpg","format":"Large Thumbnail","height":150,"width":150},{"url":"https://static01.nyt.com/images/2018/07/02/world/02mexico-top/merlin_140627415_dc13f473-7d2b-4997-803b-0cb1c54c8653-mediumThreeByTwo210.jpg","format":"mediumThreeByTwo210","height":140,"width":210},{"url":"https://static01.nyt.com/images/2018/07/02/world/02mexico-top/merlin_140627415_dc13f473-7d2b-4997-803b-0cb1c54c8653-mediumThreeByTwo440.jpg","format":"mediumThreeByTwo440","height":293,"width":440}]}]
-     */
-
-    @SerializedName("url")
-    private String url;
-    @SerializedName("adx_keywords")
-    private String adxKeywords;
-    @SerializedName("section")
-    private String section;
-    @SerializedName("byline")
-    private String byline;
-    @SerializedName("type")
-    private String type;
-    @SerializedName("title")
-    private String title;
-    @SerializedName("abstract")
-    private String abstractX;
-    @SerializedName("published_date")
-    private String publishedDate;
-    @SerializedName("source")
-    private String source;
-    @SerializedName("id")
+    @ColumnInfo(name = TableConstants.RESULT_TIME)
+    public long systemTime = System.currentTimeMillis();
+    @PrimaryKey
+    @SerializedName(TableConstants.RESULT_ID)
     private long id;
-    @SerializedName("asset_id")
+    @SerializedName(TableConstants.RESULT_URL)
+    private String url;
+    @SerializedName(value = TableConstants.RESULT_ADXKEYWORD, alternate = "adxKeywords")
+    private String adxKeywords;
+    @SerializedName(TableConstants.RESULT_SECTION)
+    private String section;
+    @SerializedName(TableConstants.RESULT_BYLINE)
+    private String byline;
+    @SerializedName(TableConstants.RESULT_TYPE)
+    private String type;
+    @SerializedName(TableConstants.RESULT_TITLE)
+    private String title;
+    @SerializedName(TableConstants.RESULT_ABSTRACT)
+    private String abstractX;
+    @SerializedName(value = TableConstants.RESULT_PUBLISHED_DATE, alternate = "publishedDate")
+    private String publishedDate;
+    @SerializedName(TableConstants.RESULT_SOURCE)
+    private String source;
+    @SerializedName(value = TableConstants.RESULT_ASSET_ID, alternate = "assertId")
     private long assetId;
-    @SerializedName("views")
+    @SerializedName(TableConstants.RESULT_VIEWS)
     private int views;
+    @Ignore
     @SerializedName("media")
     private List<MediaEntity> media;
 

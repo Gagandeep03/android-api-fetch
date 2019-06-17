@@ -1,15 +1,15 @@
 package com.androidsample.ui.activity.fragment.task1;
 
 import android.app.Activity;
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.support.v4.app.Fragment;
 
 import com.androidsample.api.ApiInterface;
-import com.androidsample.beans.ResultsEntity;
 import com.androidsample.di.qualifer.FragmentContext;
-import com.androidsample.ui.activity.fragment.task1.adapter.ListAdapter;
+import com.androidsample.ui.activity.fragment.task1.adapter.ResultAdapter;
 import com.androidsample.utils.schedulers.SchedulerProvider;
-
-import java.util.Collections;
 
 import dagger.Module;
 import dagger.Provides;
@@ -19,15 +19,18 @@ import dagger.Provides;
 public class FirstFragmentModule {
 
     @Provides
-    public FirstFragmentViewModel provideFirstFragment(SchedulerProvider schedulerProvider, ApiInterface apiInterface)
-    {
-        return new FirstFragmentViewModel(schedulerProvider, apiInterface);
+    ViewModelProvider.Factory provideFactory(SchedulerProvider schedulerProvider, ApiInterface apiInterface) {
+        return new FirstFragmentViewModelFactory(schedulerProvider, apiInterface);
     }
 
     @Provides
-    public ListAdapter providesListAdapter(@FragmentContext Context context)
-    {
-        return new ListAdapter(context, Collections.<ResultsEntity>emptyList());
+    FirstFragmentViewModel provideFirstViewModel(Fragment fragment, ViewModelProvider.Factory factory) {
+        return ViewModelProviders.of(fragment, factory).get(FirstFragmentViewModel.class);
+    }
+
+    @Provides
+    public ResultAdapter provideAdapter(@FragmentContext Context context) {
+        return new ResultAdapter(context);
     }
 
     @Provides
@@ -37,8 +40,12 @@ public class FirstFragmentModule {
     }
 
     @Provides
-    Activity provideActivity(FirstFragment fragment)
-    {
+    Activity provideActivity(FirstFragment fragment) {
         return fragment.getActivity();
+    }
+
+    @Provides
+    Fragment provideFragment(FirstFragment fragment) {
+        return fragment;
     }
 }

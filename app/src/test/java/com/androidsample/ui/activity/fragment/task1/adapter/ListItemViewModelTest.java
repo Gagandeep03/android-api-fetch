@@ -3,7 +3,8 @@ package com.androidsample.ui.activity.fragment.task1.adapter;
 import android.content.Context;
 import android.databinding.ObservableField;
 
-import com.androidsample.beans.ResultsEntity;
+import com.androidsample.beans.ResultLiveBean;
+import com.androidsample.roomdatabase.tables.ResultsEntity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -87,7 +88,7 @@ public class ListItemViewModelTest {
     @Test
     public void testOnItemClick() throws Exception {
         try {
-            ResultsEntity entity = getValidBean();
+            ResultLiveBean entity = getValidBean();
             listItemViewModel = spy(new ListItemViewModel(context, entity, listener, 1));
             listItemViewModel.onItemClick();
             Mockito.verify(listener, times(1)).onItemClick(1, entity);
@@ -100,7 +101,7 @@ public class ListItemViewModelTest {
     @Test
     public void testOnItemClickWithNullListener() throws Exception {
         try {
-            ResultsEntity entity = getValidBean();
+            ResultLiveBean entity = getValidBean();
             listItemViewModel = spy(new ListItemViewModel(context, entity, null, 1));
             listItemViewModel.onItemClick();
             Mockito.verify(listener, never()).onItemClick(1, entity);
@@ -109,7 +110,7 @@ public class ListItemViewModelTest {
         }
     }
 
-    private ResultsEntity getValidBean() {
+    private ResultLiveBean getValidBean() {
         String RESPONSE_STRING = " {\n" +
                 "\t\t\"url\": \"https:\\/\\/www.nytimes.com\\/2018\\/06\\/30\\/opinion\\/is-neymar-black-brazil-and-the-painful-relativity-of-race.html\",\n" +
                 "\t\t\"adx_keywords\": \"Race and Ethnicity;Discrimination;Politics and Government;Affirmative Action;Sociology;Slavery (Historical);Blacks;Ebony (Magazine);Foreign Policy (Magazine);United Nations;Barcelona (Soccer Team);Neymar;Pele (1940- );Brazil;Africa;Santos (Brazil);United States;South America\",\n" +
@@ -188,13 +189,13 @@ public class ListItemViewModelTest {
                 "\t\t}]\n" +
                 "\t}";
         Gson gson = new Gson();
-        ResultsEntity apiResponse = gson.fromJson(RESPONSE_STRING,
+        ResultLiveBean apiResponse = gson.fromJson(RESPONSE_STRING,
                 new TypeToken<ResultsEntity>() {
                 }.getType());
         return apiResponse;
     }
 
-    private ResultsEntity getEmptyResponseInValidBean() {
+    private ResultLiveBean getEmptyResponseInValidBean() {
         String RESPONSE_STRING = " {\n" +
                 "\t\t\"url\": \"https:\\/\\/www.nytimes.com\\/2018\\/06\\/30\\/opinion\\/is-neymar-black-brazil-and-the-painful-relativity-of-race.html\",\n" +
                 "\t\t\"adx_keywords\": \"Race and Ethnicity;Discrimination;Politics and Government;Affirmative Action;Sociology;Slavery (Historical);Blacks;Ebony (Magazine);Foreign Policy (Magazine);United Nations;Barcelona (Soccer Team);Neymar;Pele (1940- );Brazil;Africa;Santos (Brazil);United States;South America\",\n" +
@@ -273,7 +274,7 @@ public class ListItemViewModelTest {
                 "\t\t}]\n" +
                 "\t}";
         Gson gson = new Gson();
-        ResultsEntity apiResponse = gson.fromJson(RESPONSE_STRING,
+        ResultLiveBean apiResponse = gson.fromJson(RESPONSE_STRING,
                 new TypeToken<ResultsEntity>() {
                 }.getType());
         return apiResponse;

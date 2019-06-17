@@ -15,7 +15,6 @@ import static com.androidsample.fragmentId.FragmentAvailable.DETAIL_SCREEN;
 import static com.androidsample.fragmentId.FragmentAvailable.TASK_FIRST;
 
 
-
 public class MainActivityViewModel extends BaseViewModel<MainActivityPresenterView.View> implements MainActivityPresenterView.Presenter {
 
     private final String TAG = MainActivityViewModel.class.getSimpleName();

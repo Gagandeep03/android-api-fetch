@@ -27,5 +27,7 @@
     <dimen name="avatar_list_item_height">36dp</dimen>
     <dimen name="list_image_size">48dp</dimen>
 
+    <!-- Progress Bar-->
+    <dimen name="progress_bar_height">48dp</dimen>
 
 </resources>

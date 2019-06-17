@@ -3,8 +3,9 @@ package com.androidsample.ui.activity.fragment.detailView;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 
-import com.androidsample.beans.MediaEntity;
-import com.androidsample.beans.ResultsEntity;
+import com.androidsample.beans.MediaLiveBean;
+import com.androidsample.beans.ResultLiveBean;
+import com.androidsample.roomdatabase.tables.ResultsEntity;
 import com.androidsample.utils.schedulers.SchedulerProvider;
 
 import org.junit.Assert;
@@ -39,7 +40,7 @@ public class DetailFragmentViewModelTest {
     @Mock
     ObservableField<String> observer_abstract;
     @Mock
-    ResultsEntity resultsEntity;
+    ResultLiveBean resultsEntity;
     @Mock
     ObservableBoolean mIsLoading;
     @Mock
@@ -64,7 +65,7 @@ public class DetailFragmentViewModelTest {
         when(resultsEntity.getPublishedDate()).thenReturn("getPublishedDateResponse");
         when(resultsEntity.getSource()).thenReturn("getSourceResponse");
         when(resultsEntity.getViews()).thenReturn(0);
-        when(resultsEntity.getMedia()).thenReturn(Arrays.<MediaEntity>asList(new MediaEntity()));
+        when(resultsEntity.getMediaEntities()).thenReturn(Arrays.<MediaLiveBean>asList(new MediaLiveBean()));
         when(mNavigator.getAppendString(anyInt(), anyString())).thenReturn("hello");
         try {
             detailFragmentViewModel.setResultEntity(resultsEntity);
@@ -106,7 +107,7 @@ public class DetailFragmentViewModelTest {
         when(resultsEntity.getPublishedDate()).thenReturn(null);
         when(resultsEntity.getSource()).thenReturn(null);
         when(resultsEntity.getViews()).thenReturn(0);
-        when(resultsEntity.getMedia()).thenReturn(null);
+        when(resultsEntity.getMediaEntities()).thenReturn(null);
         when(mNavigator.getAppendString(anyInt(), anyString())).thenReturn(null);
         try {
             detailFragmentViewModel.setResultEntity(resultsEntity);

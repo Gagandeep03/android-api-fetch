@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.androidsample.BR;
 import com.androidsample.R;
-import com.androidsample.beans.ResultsEntity;
+import com.androidsample.beans.ResultLiveBean;
 import com.androidsample.databinding.FragmentDetailScreenBinding;
 import com.androidsample.di.module.GlideApp;
 import com.androidsample.fragmentId.FragmentAvailable;
@@ -71,7 +71,7 @@ public class DetailFragment extends BaseFragment<FragmentDetailScreenBinding, De
     private void init() {
         Bundle bundle = getArguments();
         if (bundle != null) {
-            ResultsEntity entity = bundle.getParcelable("item");
+            ResultLiveBean entity = bundle.getParcelable("item");
             viewModel.setResultEntity(entity);
         }
     }

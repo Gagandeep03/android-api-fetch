@@ -13,6 +13,4 @@ public @interface FragmentAvailable {
     int DETAIL_SCREEN = 2;
 
 
-
-
 }

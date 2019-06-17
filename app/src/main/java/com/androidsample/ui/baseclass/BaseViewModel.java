@@ -8,7 +8,7 @@ import com.androidsample.utils.schedulers.SchedulerProvider;
 import io.reactivex.disposables.CompositeDisposable;
 
 
-public abstract class BaseViewModel<N>  extends ViewModel {
+public abstract class BaseViewModel<N> extends ViewModel {
 
     private final ObservableBoolean mIsLoading = new ObservableBoolean(false);
     private SchedulerProvider mSchedulerProvider;
@@ -40,8 +40,7 @@ public abstract class BaseViewModel<N>  extends ViewModel {
     }
 
     public void onDestroyView() {
-        if (mCompositeDisposable != null && !mCompositeDisposable.isDisposed())
-            mCompositeDisposable.dispose();
+
     }
 
     public SchedulerProvider getSchedulerProvider() {
@@ -60,5 +59,10 @@ public abstract class BaseViewModel<N>  extends ViewModel {
         mIsLoading.set(isLoading);
     }
 
-
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        if (mCompositeDisposable != null && !mCompositeDisposable.isDisposed())
+            mCompositeDisposable.dispose();
+    }
 }

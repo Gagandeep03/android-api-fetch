@@ -22,6 +22,7 @@ public class GlobalApp extends MultiDexApplication implements HasActivityInjecto
     @Override
     public void onCreate() {
         super.onCreate();
+
         MultiDex.install(this);
         // Initialize the Application level dagger Component here.
         DaggerAppComponent.builder().application(this)

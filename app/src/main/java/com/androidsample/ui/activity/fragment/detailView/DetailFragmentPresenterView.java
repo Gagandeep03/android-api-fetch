@@ -1,13 +1,13 @@
 package com.androidsample.ui.activity.fragment.detailView;
 
 
-import com.androidsample.beans.ResultsEntity;
+import com.androidsample.beans.ResultLiveBean;
 
 public interface DetailFragmentPresenterView {
 
     interface Presenter {
 
-        void setResultEntity(ResultsEntity entity);
+        void setResultEntity(ResultLiveBean entity);
     }
 
     interface View {

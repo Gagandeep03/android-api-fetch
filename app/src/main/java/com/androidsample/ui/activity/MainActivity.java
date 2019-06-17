@@ -40,7 +40,7 @@ public class MainActivity extends BaseActivity<ActivityHomeBinding, MainActivity
 
     @Override
     protected void showProgressLoading(boolean showLoading) {
-
+        viewModel.setIsLoading(showLoading);
     }
 
     @Override
@@ -98,7 +98,7 @@ public class MainActivity extends BaseActivity<ActivityHomeBinding, MainActivity
         if (viewModel.getCurrentFragment() == TASK_FIRST) {
             finish();
             System.exit(0);//  super.onBackPressed();
-        }else oneStepBack();
+        } else oneStepBack();
     }
 
 }

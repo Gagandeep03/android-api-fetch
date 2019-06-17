@@ -8,7 +8,7 @@ import com.bumptech.glide.module.AppGlideModule;
 
 
 @GlideModule
-public final  class GlideConfiguration extends AppGlideModule {
+public final class GlideConfiguration extends AppGlideModule {
 
     @Override
     public void applyOptions(Context context, GlideBuilder builder) {

@@ -3,9 +3,9 @@ package com.androidsample.ui.activity.fragment.detailView;
 import android.databinding.ObservableField;
 
 import com.androidsample.R;
-import com.androidsample.beans.MediaEntity;
-import com.androidsample.beans.MediametadataEntity;
-import com.androidsample.beans.ResultsEntity;
+import com.androidsample.beans.MediaLiveBean;
+import com.androidsample.beans.ResultLiveBean;
+import com.androidsample.roomdatabase.tables.MediaMetadataEntity;
 import com.androidsample.ui.activity.fragment.detailView.DetailFragmentPresenterView.Presenter;
 import com.androidsample.ui.activity.fragment.detailView.DetailFragmentPresenterView.View;
 import com.androidsample.ui.baseclass.BaseViewModel;
@@ -22,7 +22,7 @@ public class DetailFragmentViewModel extends BaseViewModel<View> implements Pres
     public ObservableField<String> observer_views_count = new ObservableField<>();
     public ObservableField<String> observer_section = new ObservableField<>();
     public ObservableField<String> observer_abstract = new ObservableField<>();
-    ResultsEntity resultsEntity;
+    ResultLiveBean resultsEntity;
 
 
     public DetailFragmentViewModel() {
@@ -31,7 +31,7 @@ public class DetailFragmentViewModel extends BaseViewModel<View> implements Pres
 
 
     @Override
-    public void setResultEntity(ResultsEntity entity) {
+    public void setResultEntity(ResultLiveBean entity) {
         this.resultsEntity = entity;
         if (resultsEntity != null) {
             synchronized (resultsEntity) {
@@ -49,11 +49,11 @@ public class DetailFragmentViewModel extends BaseViewModel<View> implements Pres
     }
 
     private void setImage() {
-        List<MediaEntity> mediaEntities = resultsEntity.getMedia();
+        List<MediaLiveBean> mediaEntities = resultsEntity.getMediaEntities();
         if (mediaEntities != null) {
-            List<MediametadataEntity> mediametadataEntities = mediaEntities.get(0).getMediametadata();
+            List<MediaMetadataEntity> mediametadataEntities = mediaEntities.get(0).getMediaMetadataEntities();
             if (mediametadataEntities != null) {
-                for (MediametadataEntity entity : mediametadataEntities) {
+                for (MediaMetadataEntity entity : mediametadataEntities) {
                     if (entity.getFormat().equalsIgnoreCase("Large")) {
                         getmNavigator().loadImage(entity.getUrl());
                         break;

@@ -22,11 +22,8 @@ import android.widget.Toast;
 import com.androidsample.fragmentId.FragmentAvailable;
 
 
-
-
-public abstract class BaseActivity<T extends ViewDataBinding,V extends BaseViewModel>
-        extends AppCompatActivity implements BaseFragment.Callback{
-
+public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseViewModel>
+        extends AppCompatActivity implements BaseFragment.Callback {
 
 
     private T mViewDataBinding;
@@ -47,9 +44,8 @@ public abstract class BaseActivity<T extends ViewDataBinding,V extends BaseViewM
         super.attachBaseContext(newBase);
     }
 
-    private void performDataBinding()
-    {
-        mViewDataBinding = DataBindingUtil.setContentView(this,getLayoutId());
+    private void performDataBinding() {
+        mViewDataBinding = DataBindingUtil.setContentView(this, getLayoutId());
         this.mViewModel = mViewModel == null ? getViewModel() : mViewModel;
         mViewDataBinding.setVariable(getBindingVariable(), mViewModel);
         mViewDataBinding.executePendingBindings();
@@ -94,17 +90,13 @@ public abstract class BaseActivity<T extends ViewDataBinding,V extends BaseViewM
         }
     }
 
-    public void showToast(String message)
-    {
-        if(message !=null)
-        {
-            Toast.makeText(this,message, Toast.LENGTH_LONG).show();
+    public void showToast(String message) {
+        if (message != null) {
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         }
     }
 
     protected abstract void showProgressLoading(boolean showloading);
-
-
 
 
     public T getViewDataBinding() {
@@ -138,7 +130,8 @@ public abstract class BaseActivity<T extends ViewDataBinding,V extends BaseViewM
 
 
     /**
-     *  For control the fragment switching on the Activity
+     * For control the fragment switching on the Activity
+     *
      * @param newFragmentType
      * @param extras
      * @param isBackStep
@@ -147,7 +140,8 @@ public abstract class BaseActivity<T extends ViewDataBinding,V extends BaseViewM
     protected abstract void changeCurrentFragment(@FragmentAvailable int newFragmentType, Bundle extras, boolean isBackStep, boolean isFragReplace);
 
     /**
-     *   Get the current fragment attached with @{@link android.app.Activity}
+     * Get the current fragment attached with @{@link android.app.Activity}
+     *
      * @param currentFragment1
      */
     protected abstract void setCurrentFragment(@FragmentAvailable int currentFragment1);

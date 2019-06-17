@@ -14,7 +14,6 @@ import dagger.Component;
 import dagger.android.AndroidInjectionModule;
 
 
-
 @Singleton
 @Component(modules = {AndroidInjectionModule.class, AppModule.class, NetworkModule.class,
         ActivityBuilder.class})
@@ -23,11 +22,9 @@ public interface AppComponent {
     void inject(GlobalApp app);
 
     @Component.Builder
-    interface Builder
-    {
+    interface Builder {
         @BindsInstance
         Builder application(Application application);
-
 
 
         AppComponent build();
