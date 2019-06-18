@@ -2,7 +2,6 @@ package com.androidsample.ui.activity.fragment.task1;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.paging.PagedList;
-import android.util.Log;
 
 import com.androidsample.R;
 import com.androidsample.api.ApiInterface;
@@ -58,7 +57,7 @@ public class FirstFragmentViewModel extends BaseViewModel<FirstFragmentPresenter
 
         DisposableObserver<List<MediaMetadataEntity>> observer = getDbInsertObserver();
 
-        apiInterface.getMostPopularList(date, apiKey).delay(3, TimeUnit.SECONDS)
+        apiInterface.getMostPopularList(date, apiKey)
                 .timeout(10, TimeUnit.SECONDS).flatMap(new Function<ApiResponse, ObservableSource<List<ResultsEntity>>>() {
             @Override
             public ObservableSource<List<ResultsEntity>> apply(ApiResponse apiResponse) throws Exception {
@@ -67,7 +66,7 @@ public class FirstFragmentViewModel extends BaseViewModel<FirstFragmentPresenter
                     if (apiResponse.getStatus() != null && apiResponse.getStatus().equalsIgnoreCase("OK")) {
                         return Observable.just(apiResponse.getResults());
                     }
-                    //  return Observable.error(new Throwable(apiResponse.getMessage()));
+
                 }
                 throw new Exception(getmNavigator().getStringIds(R.string.error_api_response));
                 //return null;
@@ -75,12 +74,12 @@ public class FirstFragmentViewModel extends BaseViewModel<FirstFragmentPresenter
         }).flatMap(new Function<List<ResultsEntity>, ObservableSource<ResultsEntity>>() {
             @Override
             public ObservableSource<ResultsEntity> apply(List<ResultsEntity> resultsEntities) throws Exception {
-                return Observable.fromIterable(resultsEntities).delay(20, TimeUnit.MILLISECONDS);
+                return Observable.fromIterable(resultsEntities);
             }
         }).flatMap(new Function<ResultsEntity, ObservableSource<ResultsEntity>>() {
             @Override
             public ObservableSource<ResultsEntity> apply(final ResultsEntity resultsEntity) throws Exception {
-                Log.d(TAG, " Result Entity  ==== " + resultsEntity.getTitle());
+                //    Log.d(TAG, " Result Entity  ==== " + resultsEntity.getTitle());
 
                 synchronized (resultsEntity) {
                     long id = getmNavigator().insertResultEntry(resultsEntity);
@@ -108,7 +107,7 @@ public class FirstFragmentViewModel extends BaseViewModel<FirstFragmentPresenter
             @Override
             public ObservableSource<MediaEntity> apply(MediaEntity mediaEntity) throws Exception {
                 //  Update the media id;
-                Log.d(TAG, " Media Entity  ==== " + mediaEntity.getType());
+                //     Log.d(TAG, " Media Entity  ==== " + mediaEntity.getType());
                 synchronized (mediaEntity) {
                     long mediaId = getmNavigator().insertMediaEntry(mediaEntity);
                     mediaEntity.setMediaId(mediaId);
@@ -132,7 +131,7 @@ public class FirstFragmentViewModel extends BaseViewModel<FirstFragmentPresenter
             @Override
             public void onNext(List<MediaMetadataEntity> mediaMetadataEntities) {
                 if (mediaMetadataEntities != null) {
-                    Log.d(TAG, "Database update successfully--> " + mediaMetadataEntities.size());
+                    //    Log.d(TAG, "Database update successfully--> " + mediaMetadataEntities.size());
                     getmNavigator().insertMediaMetaList(mediaMetadataEntities);
 
                 }
@@ -140,7 +139,7 @@ public class FirstFragmentViewModel extends BaseViewModel<FirstFragmentPresenter
 
             @Override
             public void onError(Throwable e) {
-                Log.e(TAG, "On Error " + e.getCause());
+                // Log.e(TAG, "On Error " + e.getCause());
                 getmNavigator().showToast(getmNavigator().getStringIds(R.string.error_api_response));
                 getmNavigator().hideLoading();
             }
@@ -158,7 +157,7 @@ public class FirstFragmentViewModel extends BaseViewModel<FirstFragmentPresenter
             public void subscribe(ObservableEmitter<List<MediaEntity>> emitter) throws Exception {
                 List<MediaEntity> list = new ArrayList<>(resultsEntity.getMedia().size());
                 long resultId = resultsEntity.getId();
-                Log.d(TAG, "result Id --- > " + resultId);
+                //    Log.d(TAG, "result Id --- > " + resultId);
                 for (MediaEntity mediaEntity : resultsEntity.getMedia()) {
                     mediaEntity.setResultId(resultId);
                     list.add(mediaEntity);
@@ -175,7 +174,7 @@ public class FirstFragmentViewModel extends BaseViewModel<FirstFragmentPresenter
             public void subscribe(ObservableEmitter<List<MediaMetadataEntity>> emitter) throws Exception {
                 List<MediaMetadataEntity> list = new ArrayList<>(mediaEntity.getMediametadata().size());
                 long mediaId = mediaEntity.getMediaId();
-                Log.d(TAG, "media Id --- > " + mediaId);
+                //  Log.d(TAG, "media Id --- > " + mediaId);
                 for (MediaMetadataEntity mediametadataEntity : mediaEntity.getMediametadata()) {
                     mediametadataEntity.setMediaId(mediaId);
                     list.add(mediametadataEntity);

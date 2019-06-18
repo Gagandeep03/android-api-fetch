@@ -190,7 +190,7 @@ public class ListItemViewModelTest {
                 "\t}";
         Gson gson = new Gson();
         ResultLiveBean apiResponse = gson.fromJson(RESPONSE_STRING,
-                new TypeToken<ResultsEntity>() {
+                new TypeToken<ResultLiveBean>() {
                 }.getType());
         return apiResponse;
     }
@@ -275,7 +275,7 @@ public class ListItemViewModelTest {
                 "\t}";
         Gson gson = new Gson();
         ResultLiveBean apiResponse = gson.fromJson(RESPONSE_STRING,
-                new TypeToken<ResultsEntity>() {
+                new TypeToken<ResultLiveBean>() {
                 }.getType());
         return apiResponse;
     }

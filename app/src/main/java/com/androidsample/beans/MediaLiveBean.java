@@ -28,7 +28,7 @@ public class MediaLiveBean implements Parcelable {
     @Relation(parentColumn = TableConstants.MEDIA_ID,
             entity = MediaMetadataEntity.class,
             entityColumn = TableConstants.META_MEDIA_ID)
-    @SerializedName(value = "mediaMeta")
+    @SerializedName(value = "mediaMeta", alternate = "media-metadata")
     public List<MediaMetadataEntity> mediaMetadataEntities;
     @SerializedName(TableConstants.MEDIA_ID)
     private long mediaId;

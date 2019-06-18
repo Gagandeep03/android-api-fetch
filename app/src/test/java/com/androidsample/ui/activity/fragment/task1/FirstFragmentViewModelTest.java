@@ -4,6 +4,8 @@ import android.databinding.ObservableBoolean;
 
 import com.androidsample.api.ApiInterface;
 import com.androidsample.beans.ApiResponse;
+import com.androidsample.roomdatabase.tables.MediaEntity;
+import com.androidsample.roomdatabase.tables.MediaMetadataEntity;
 import com.androidsample.roomdatabase.tables.ResultsEntity;
 import com.androidsample.utils.schedulers.SchedulerProvider;
 import com.google.gson.Gson;
@@ -12,6 +14,7 @@ import com.google.gson.reflect.TypeToken;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -24,8 +27,10 @@ import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 import io.reactivex.schedulers.TestScheduler;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -69,13 +74,15 @@ public class FirstFragmentViewModelTest {
     public void testLoadApiWithValidResponse() {
         try {
             when(apiInterface.getMostPopularList("date", "apiKey")).thenReturn(getPositiveResponse());
+            when(mNavigator.insertResultEntry(any(ResultsEntity.class))).thenReturn(1l);
+            when(mNavigator.insertMediaEntry(any(MediaEntity.class))).thenReturn(1l);
             FirstFragmentViewModel firstFragmentViewModel = getFirstFragmentViewModel();
             firstFragmentViewModel.loadApi("date", "apiKey");
             testScheduler.triggerActions();
-            //  verify(mNavigator, times(1)).setAdapter(ArgumentMatchers.<ResultsEntity>anyList());
+            verify(mNavigator, atLeast(1)).insertMediaMetaList(ArgumentMatchers.<MediaMetadataEntity>anyList());
             verify(mNavigator, never()).showToast(anyString());
             verify(mNavigator, never()).getStringIds(anyInt());
-
+            verify(mNavigator, times(1)).hideLoading();
         } catch (Exception ex) {
             Assert.fail("Test fail");
         }
@@ -91,7 +98,7 @@ public class FirstFragmentViewModelTest {
             testScheduler.triggerActions();
             //  verify(mNavigator, never()).setAdapter(ArgumentMatchers.<ResultsEntity>anyList());
             verify(mNavigator, times(1)).showToast("Error");
-            verify(mNavigator, times(1)).getStringIds(anyInt());
+            verify(mNavigator, times(2)).getStringIds(anyInt());
 
         } catch (Exception ex) {
             Assert.fail("Test fail");
@@ -108,7 +115,8 @@ public class FirstFragmentViewModelTest {
             testScheduler.triggerActions();
             //   verify(mNavigator, never()).setAdapter(ArgumentMatchers.<ResultsEntity>anyList());
             verify(mNavigator, times(1)).showToast("Error");
-            verify(mNavigator, times(1)).getStringIds(anyInt());
+            verify(mNavigator, times(2)).getStringIds(anyInt());
+            verify(mNavigator, times(1)).hideLoading();
         } catch (Exception ex) {
             Assert.fail("Test fail");
         }
@@ -131,7 +139,8 @@ public class FirstFragmentViewModelTest {
             testScheduler.triggerActions();
             //        verify(mNavigator, never()).setAdapter(ArgumentMatchers.<ResultsEntity>anyList());
             verify(mNavigator, times(1)).showToast("Error");
-            verify(mNavigator, times(1)).getStringIds(anyInt());
+            verify(mNavigator, times(2)).getStringIds(anyInt());
+            verify(mNavigator, times(1)).hideLoading();
         } catch (Exception ex) {
             Assert.fail("Test fail");
         }
@@ -155,6 +164,7 @@ public class FirstFragmentViewModelTest {
             //    verify(mNavigator, never()).setAdapter(ArgumentMatchers.<ResultsEntity>anyList());
             verify(mNavigator, times(1)).showToast("Error");
             verify(mNavigator, times(1)).getStringIds(anyInt());
+            verify(mNavigator, times(1)).hideLoading();
         } catch (Exception ex) {
             Assert.fail("Test fail");
         }

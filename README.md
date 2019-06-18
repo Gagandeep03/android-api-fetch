@@ -8,6 +8,7 @@ their detail on next fragment screen.
 * RecyclerView
 * Retrofit with RxJava
 * Dagger2
+* Room Database
 * ObservableFields
 * Glide library for image loading
 * Mockito for unit test cases
